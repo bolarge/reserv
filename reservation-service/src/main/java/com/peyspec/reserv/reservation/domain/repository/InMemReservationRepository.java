@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  *
- * @author Sourabh Sharma
+ * @author Bolaji Salau
  */
 @Repository("reservationRepository")
 public class InMemReservationRepository implements ReservationRepository<Reservation, String> {

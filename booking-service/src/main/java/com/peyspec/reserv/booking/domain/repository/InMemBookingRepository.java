@@ -46,19 +46,11 @@ public class InMemBookingRepository implements BookingRepository<Booking, String
         return false;
     }
 
-    /**
-     *
-     * @param entity
-     */
     @Override
     public void add(Booking entity) {
         entities.put(entity.getId(), entity);
     }
 
-    /**
-     *
-     * @param id
-     */
     @Override
     public void remove(String id) {
         if (entities.containsKey(id)) {
@@ -66,10 +58,6 @@ public class InMemBookingRepository implements BookingRepository<Booking, String
         }
     }
 
-    /**
-     *
-     * @param entity
-     */
     @Override
     public void update(Booking entity) {
         if (entities.containsKey(entity.getId())) {
@@ -77,30 +65,16 @@ public class InMemBookingRepository implements BookingRepository<Booking, String
         }
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
     @Override
     public boolean contains(String id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     *
-     * @param id
-     * @return
-     */
     @Override
     public Booking get(String id) {
         return entities.get(id);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public Collection<Booking> getAll() {
         return entities.values();

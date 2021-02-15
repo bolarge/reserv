@@ -20,10 +20,6 @@ public class UserServiceImpl extends BaseService<User, String>
 
     private UserRepository<User, String> userRepository;
 
-    /**
-     *
-     * @param userRepository
-     */
     @Autowired
     public UserServiceImpl(UserRepository<User, String> userRepository) {
         super(userRepository);
@@ -42,54 +38,26 @@ public class UserServiceImpl extends BaseService<User, String>
         super.add(user);
     }
 
-    /**
-     *
-     * @param name
-     * @return
-     * @throws Exception
-     */
     @Override
     public Collection<User> findByName(String name) throws Exception {
         return userRepository.findByName(name);
     }
 
-    /**
-     *
-     * @param user
-     * @throws Exception
-     */
     @Override
     public void update(User user) throws Exception {
         userRepository.update(user);
     }
 
-    /**
-     *
-     * @param id
-     * @throws Exception
-     */
     @Override
     public void delete(String id) throws Exception {
         userRepository.remove(id);
     }
 
-    /**
-     *
-     * @param restaurantId
-     * @return
-     * @throws Exception
-     */
     @Override
     public Entity findById(String restaurantId) throws Exception {
         return userRepository.get(restaurantId);
     }
 
-    /**
-     *
-     * @param name
-     * @return
-     * @throws Exception
-     */
     @Override
     public Collection<User> findByCriteria(Map<String, ArrayList<String>> name) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

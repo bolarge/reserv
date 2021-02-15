@@ -22,20 +22,10 @@ import java.util.logging.Logger;
 @RequestMapping("/v1/booking")
 public class BookingController {
 
-    /**
-     *
-     */
     protected static final Logger logger = Logger.getLogger(BookingController.class.getName());
 
-    /**
-     *
-     */
     protected BookingService bookingService;
 
-    /**
-     *
-     * @param bookingService
-     */
     @Autowired
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;

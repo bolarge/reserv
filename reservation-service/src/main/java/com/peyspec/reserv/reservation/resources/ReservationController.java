@@ -5,7 +5,7 @@ package com.peyspec.reserv.reservation.resources;
 import com.peyspec.reserv.reservation.domain.entity.Entity;
 import com.peyspec.reserv.reservation.domain.entity.Reservation;
 import com.peyspec.reserv.reservation.domain.service.ReservationService;
-import com.peyspec.reserv.reservation.domain.valueobject.RestaurantVO;
+import com.peyspec.reserv.reservation.domain.valueobject.ReservationVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -22,20 +22,10 @@ import java.util.logging.Logger;
 @RequestMapping("/v1/reservations")
 public class ReservationController {
 
-    /**
-     * Logger
-     */
     protected Logger logger = Logger.getLogger(ReservationController.class.getName());
 
-    /**
-     * restaurant service
-     */
     protected ReservationService restaurantService;
 
-    /**
-     *
-     * @param restaurantService
-     */
     @Autowired
     public ReservationController(ReservationService restaurantService) {
         this.restaurantService = restaurantService;
@@ -44,10 +34,6 @@ public class ReservationController {
     @Autowired
     DiscoveryClient client;
 
-    /**
-     *
-     * @return
-     */
     @RequestMapping("/services")
     public List<String> home() {
         return client.getServices();
@@ -108,7 +94,7 @@ public class ReservationController {
      * @return A non-null restaurant.
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Reservation> add(@RequestBody RestaurantVO restaurantVO) {
+    public ResponseEntity<Reservation> add(@RequestBody ReservationVO restaurantVO) {
         logger.info(String.format("restaurant-service add() invoked: %s for %s", restaurantService.getClass().getName(), restaurantVO.getName()));
         System.out.println(restaurantVO);
         Reservation restaurant = new Reservation(null, null, null, null);
@@ -122,23 +108,11 @@ public class ReservationController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    /**
-     * Fallback method
-     *
-     * @param input
-     * @return
-     */
     public ResponseEntity<Entity> defaultRestaurant(String input) {
         logger.warning("Fallback method for restaurant-service is being used.");
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * Fallback method
-     *
-     * @param input
-     * @return
-     */
     public ResponseEntity<Collection<Reservation>> defaultRestaurants(String input) {
         logger.warning("Fallback method for user-service is being used.");
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);

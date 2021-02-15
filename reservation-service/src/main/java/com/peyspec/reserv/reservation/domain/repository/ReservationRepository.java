@@ -5,23 +5,12 @@ import java.util.Collection;
 /**
  *
  * @author Sourabh Sharma
- * @param <Restaurant>
+ * @param <Reservation>
  * @param <String>
  */
-public interface ReservationRepository<Restaurant, String> extends Repository<Restaurant, String> {
+public interface ReservationRepository<Reservation, String> extends Repository<Reservation, String> {
 
-    /**
-     *
-     * @param name
-     * @return
-     */
     boolean containsName(String name);
 
-    /**
-     *
-     * @param name
-     * @return
-     * @throws Exception
-     */
-    public Collection<Restaurant> findByName(String name) throws Exception;
+    public Collection<Reservation> findByName(String name) throws Exception;
 }

@@ -24,20 +24,10 @@ import java.util.logging.Logger;
 @RequestMapping("/v1/user")
 public class UserController {
 
-    /**
-     * Logger
-     */
     protected Logger logger = Logger.getLogger(UserController.class.getName());
 
-    /**
-     * user service
-     */
     protected UserService userService;
 
-    /**
-     *
-     * @param userService
-     */
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -90,12 +80,6 @@ public class UserController {
                 : new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * Add user with the specified information.
-     *
-     * @param userVO
-     * @return A non-null user.
-     */
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<User> add(@RequestBody UserVO userVO) {
         logger.info(String.format("user-service add() invoked: %s for %s", userService.getClass().getName(), userVO.getName()));
@@ -111,23 +95,11 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    /**
-     * Fallback method
-     *
-     * @param input
-     * @return
-     */
     public ResponseEntity<Entity> defaultUser(String input) {
         logger.warning("Fallback method for user-service is being used.");
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
-    /**
-     * Fallback method
-     *
-     * @param input
-     * @return
-     */
     public ResponseEntity<Collection<User>> defaultUsers(String input) {
         logger.warning("Fallback method for user-service is being used.");
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
