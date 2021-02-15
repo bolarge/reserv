@@ -6,3 +6,4 @@
 /.idea/
 /eureka-server/eureka-server.iml
 /service-discovery/service-discovery.iml
+/zuul-server/zuul-server.iml
