@@ -13,6 +13,9 @@
     <name>users-service</name>
     <packaging>jar</packaging>
 
+    <properties>
+        <start-class>com.peyspec.reserv.user.UsersApp</start-class>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -54,6 +57,5 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

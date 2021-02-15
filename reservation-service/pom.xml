@@ -13,6 +13,10 @@
     <name>reservation-service</name>
     <packaging>jar</packaging>
 
+    <properties>
+        <start-class>com.peyspec.reserv.reservation.ReservationApp</start-class>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

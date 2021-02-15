@@ -33,6 +33,7 @@
         <module>booking-service</module>
         <module>reservation-service</module>
         <module>users-service</module>
+        <module>service-discovery</module>
     </modules>
 
     <properties>

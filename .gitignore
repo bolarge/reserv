@@ -4,3 +4,5 @@
 /reservation-service/target/
 /booking-service/target/
 /.idea/
+/eureka-server/eureka-server.iml
+/service-discovery/service-discovery.iml
