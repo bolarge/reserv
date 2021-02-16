@@ -24,11 +24,11 @@ public class ReservationController {
 
     protected Logger logger = Logger.getLogger(ReservationController.class.getName());
 
-    protected ReservationService restaurantService;
+    protected ReservationService reservationService;
 
     @Autowired
-    public ReservationController(ReservationService restaurantService) {
-        this.restaurantService = restaurantService;
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
     }
 
     @Autowired
@@ -50,11 +50,11 @@ public class ReservationController {
     //@HystrixCommand(fallbackMethod = "defaultRestaurants")
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Collection<Reservation>> findByName(@RequestParam("name") String name) {
-        logger.info(String.format("restaurant-service findByName() invoked:{} for {} ", restaurantService.getClass().getName(), name));
+        logger.info(String.format("reservation-service findByName() invoked:{} for {} ", reservationService.getClass().getName(), name));
         name = name.trim().toLowerCase();
         Collection<Reservation> restaurants;
         try {
-            restaurants = restaurantService.findByName(name);
+            restaurants = reservationService.findByName(name);
         } catch (Exception ex) {
             logger.log(Level.SEVERE, "Exception raised findByName REST Call", ex);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,20 +65,20 @@ public class ReservationController {
 
     /**
      * Fetch restaurants with the given id.
-     * <code>http://.../v1/restaurants/{restaurant_id}</code> will return
-     * restaurant with given id.
+     * <code>http://.../v1/reservations/{reservation_id}</code> will return
+     * reservation with given id.
      *
      * @param id
-     * @return A non-null, non-empty collection of restaurants.
+     * @return A non-null, non-empty collection of reservations.
      */
-    //@HystrixCommand(fallbackMethod = "defaultRestaurant")
+    //@HystrixCommand(fallbackMethod = "defaultReservation")
     @RequestMapping(value = "/{restaurant_id}", method = RequestMethod.GET)
     public ResponseEntity<Entity> findById(@PathVariable("restaurant_id") String id) {
-        logger.info(String.format("restaurant-service findById() invoked:{} for {} ", restaurantService.getClass().getName(), id));
+        logger.info(String.format("restaurant-service findById() invoked:{} for {} ", reservationService.getClass().getName(), id));
         id = id.trim();
         Entity restaurant;
         try {
-            restaurant = restaurantService.findById(id);
+            restaurant = reservationService.findById(id);
         } catch (Exception ex) {
             logger.log(Level.WARNING, "Exception raised findById REST Call {0}", ex);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -90,30 +90,30 @@ public class ReservationController {
     /**
      * Add restaurant with the specified information.
      *
-     * @param restaurantVO
+     * @param reservationVO
      * @return A non-null restaurant.
      */
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Reservation> add(@RequestBody ReservationVO restaurantVO) {
-        logger.info(String.format("restaurant-service add() invoked: %s for %s", restaurantService.getClass().getName(), restaurantVO.getName()));
-        System.out.println(restaurantVO);
+    public ResponseEntity<Reservation> add(@RequestBody ReservationVO reservationVO) {
+        logger.info(String.format("reservation-service add() invoked: %s for %s", reservationService.getClass().getName(), reservationVO.getName()));
+        System.out.println(reservationVO);
         Reservation restaurant = new Reservation(null, null, null, null);
-        BeanUtils.copyProperties(restaurantVO, restaurant);
+        BeanUtils.copyProperties(reservationVO, restaurant);
         try {
-            restaurantService.add(restaurant);
+            reservationService.add(restaurant);
         } catch (Exception ex) {
-            logger.log(Level.WARNING, "Exception raised add Restaurant REST Call {0}", ex);
+            logger.log(Level.WARNING, "Exception raised add Reservation REST Call {0}", ex);
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Entity> defaultRestaurant(String input) {
-        logger.warning("Fallback method for restaurant-service is being used.");
+    public ResponseEntity<Entity> defaultReservation(String input) {
+        logger.warning("Fallback method for reservation-service is being used.");
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
-    public ResponseEntity<Collection<Reservation>> defaultRestaurants(String input) {
+    public ResponseEntity<Collection<Reservation>> defaultReservations(String input) {
         logger.warning("Fallback method for user-service is being used.");
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
